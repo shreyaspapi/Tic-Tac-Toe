@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var player1Label: UILabel!
     @IBOutlet weak var player2Label: UILabel!
     
+    
+    
     var count = 0
     
     @IBOutlet var buttons: [UIButton]!
