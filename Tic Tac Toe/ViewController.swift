@@ -12,36 +12,67 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    @IBOutlet weak var player1Label: UILabel!
-    @IBOutlet weak var player2Label: UILabel!
+    @IBOutlet weak var turn: UILabel!
     
-    let winningPositions = [[0,1,2], [3,4,5], [6,7,8], [0, 3, 6], [1,4,7], [2,5,8], [], []]
-    
+    let winningPositions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+    var pressedPositionsCross = [Int]()
+    var pressedPositionsCircle = [Int]()
+    var allPressedButtons = [Int]()
     var count = 0
     
     @IBOutlet var buttons: [UIButton]!
+    
+    func checkWinning(with currentPositionsCross: [Int], and currentPositionsCircle: [Int]) -> Bool {
+        var checker = false
+        let setCurrentPositionsCross = Set(currentPositionsCross)
+        let setCurrentPositionsCircle = Set(currentPositionsCircle)
+        for pair in winningPositions {
+            let setPair = Set(pair)
+            if setPair.isSubset(of: setCurrentPositionsCross) ||  setPair.isSubset(of: setCurrentPositionsCircle){
+                checker = true
+                break
+            }
+        }
+        return checker
+    }
     
     func putCrossCircle(on button: UIButton) {
         if count % 2 == 0 {
             button.setTitle("⭕️", for: .normal)
             
-            player1Label.textColor = #colorLiteral(red: 0.8472519517, green: 0.831594944, blue: 0.1624552906, alpha: 1)
-            player2Label.textColor = #colorLiteral(red: 0.04677937925, green: 0.6296003461, blue: 0.5724986196, alpha: 1)
+            turn.text = "❌"
         } else {
             button.setTitle("❌", for: .normal)
             
-            player1Label.textColor = #colorLiteral(red: 0.04677937925, green: 0.6296003461, blue: 0.5724986196, alpha: 1)
-            player2Label.textColor = #colorLiteral(red: 0.8472519517, green: 0.831594944, blue: 0.1624552906, alpha: 1)
+            turn.text = "⭕️"
+        }
+    }
+    
+    func updateNumberOfButtonsPressed(with buttonNumber: Int){
+        if count % 2 == 0 {
+            pressedPositionsCross.append(buttonNumber)
+        } else {
+            pressedPositionsCircle.append(buttonNumber)
         }
     }
     
     @IBAction func touchButton(_ sender: UIButton) {
-        let buttonNumber = buttons.index(of: sender)
-        // Do not change anything
-        print("Button Number: \(buttonNumber as Int?)")
-        count += 1
-        putCrossCircle(on: sender)
+        let buttonNumber = buttons.index(of: sender)!
+        if allPressedButtons.contains(buttonNumber) == false {
+            allPressedButtons.append(buttonNumber)
+            print("Button Number: \(buttonNumber as Int?)")
+            count += 1
+            putCrossCircle(on: sender)
+            updateNumberOfButtonsPressed(with: buttonNumber)
+            
+            if checkWinning(with: pressedPositionsCross, and: pressedPositionsCircle){
+                if count % 2 == 0{
+                    turn.text = "Winner: ⭕️"
+                } else {
+                    turn.text = "Winner: ❌"
+                }
+            }
+        }
     }
-    
 }
 
