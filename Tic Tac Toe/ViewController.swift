@@ -23,12 +23,12 @@ class ViewController: UIViewController {
     
     func putCrossCircle(on button: UIButton) {
         if count % 2 == 0 {
-            button.setTitle("❌", for: .normal)
+            button.setTitle("⭕️", for: .normal)
             
             player1Label.textColor = #colorLiteral(red: 0.8472519517, green: 0.831594944, blue: 0.1624552906, alpha: 1)
             player2Label.textColor = #colorLiteral(red: 0.04677937925, green: 0.6296003461, blue: 0.5724986196, alpha: 1)
         } else {
-            button.setTitle("⭕️", for: .normal)
+            button.setTitle("❌", for: .normal)
             
             player1Label.textColor = #colorLiteral(red: 0.04677937925, green: 0.6296003461, blue: 0.5724986196, alpha: 1)
             player2Label.textColor = #colorLiteral(red: 0.8472519517, green: 0.831594944, blue: 0.1624552906, alpha: 1)
