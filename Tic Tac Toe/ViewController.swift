@@ -38,7 +38,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchButton(_ sender: UIButton) {
         let buttonNumber = buttons.index(of: sender)
-        
+        count += 1
     }
     
 }
