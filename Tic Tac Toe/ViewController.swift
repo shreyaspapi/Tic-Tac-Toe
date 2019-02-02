@@ -35,6 +35,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchButton(_ sender: UIButton) {
         let buttonNumber = buttons.index(of: sender)
+        // Do not change anything
         print("Button Number: \(buttonNumber as Int?)")
         count += 1
         putCrossCircle(on: sender)
