@@ -17,7 +17,13 @@ class ViewController: UIViewController {
     
     var count = 0 {
         didSet {
-            
+            if count % 2 == 0 {
+                player1Label.textColor = #colorLiteral(red: 0.8472519517, green: 0.831594944, blue: 0.1624552906, alpha: 1)
+                player2Label.textColor = #colorLiteral(red: 0.04677937925, green: 0.6296003461, blue: 0.5724986196, alpha: 1)
+            } else {
+                player1Label.textColor = #colorLiteral(red: 0.04677937925, green: 0.6296003461, blue: 0.5724986196, alpha: 1)
+                player2Label.textColor = #colorLiteral(red: 0.8472519517, green: 0.831594944, blue: 0.1624552906, alpha: 1)
+            }
         }
     }
     
@@ -27,7 +33,7 @@ class ViewController: UIViewController {
         button.setImage(#imageLiteral(resourceName: "cross") ,for: .normal)
     }
     func putCircle(on button: UIButton) {
-        button.setImage(#imageLiteral(resourceName: "cross") ,for: .normal)
+        button.setImage(#imageLiteral(resourceName: "circle") ,for: .normal)
     }
     
     @IBAction func touchButton(_ sender: UIButton) {
