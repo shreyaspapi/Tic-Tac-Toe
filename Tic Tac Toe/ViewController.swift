@@ -15,29 +15,28 @@ class ViewController: UIViewController {
     @IBOutlet weak var player1Label: UILabel!
     @IBOutlet weak var player2Label: UILabel!
     
-    var count = 0 {
-        didSet {
-            if count % 2 == 0 {
-                player1Label.textColor = #colorLiteral(red: 0.8472519517, green: 0.831594944, blue: 0.1624552906, alpha: 1)
-                player2Label.textColor = #colorLiteral(red: 0.04677937925, green: 0.6296003461, blue: 0.5724986196, alpha: 1)
-            } else {
-                player1Label.textColor = #colorLiteral(red: 0.04677937925, green: 0.6296003461, blue: 0.5724986196, alpha: 1)
-                player2Label.textColor = #colorLiteral(red: 0.8472519517, green: 0.831594944, blue: 0.1624552906, alpha: 1)
-            }
-        }
-    }
+    var count = 0
     
     @IBOutlet var buttons: [UIButton]!
     
-    func putCross(on button: UIButton) {
-        button.setImage(#imageLiteral(resourceName: "cross") ,for: .normal)
-    }
-    func putCircle(on button: UIButton) {
-        button.setImage(#imageLiteral(resourceName: "circle") ,for: .normal)
+    func putCrossCircle(on button: UIButton) {
+        if count % 2 == 0 {
+            button.setImage(#imageLiteral(resourceName: "cross") ,for: .normal)
+            
+            player1Label.textColor = #colorLiteral(red: 0.8472519517, green: 0.831594944, blue: 0.1624552906, alpha: 1)
+            player2Label.textColor = #colorLiteral(red: 0.04677937925, green: 0.6296003461, blue: 0.5724986196, alpha: 1)
+        } else {
+            button.setImage(#imageLiteral(resourceName: "circle") ,for: .normal)
+            
+            player1Label.textColor = #colorLiteral(red: 0.04677937925, green: 0.6296003461, blue: 0.5724986196, alpha: 1)
+            player2Label.textColor = #colorLiteral(red: 0.8472519517, green: 0.831594944, blue: 0.1624552906, alpha: 1)
+        }
     }
     
     @IBAction func touchButton(_ sender: UIButton) {
         let buttonNumber = buttons.index(of: sender)
+        putCrossCircle(on: sender)
+        
         count += 1
     }
     
